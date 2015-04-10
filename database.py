@@ -96,7 +96,7 @@ class CRUDMixin(object):
         return commit and db_session.commit()
 
 
-class PalvinBaseModel(CRUDMixin, object):
+class PalvinBase(CRUDMixin, object):
 
     @declared_attr
     def __tablename__(cls):
@@ -127,6 +127,6 @@ db_session = scoped_session(
     )
 )
 
-Base = declarative_base(cls=PalvinBaseModel)
+Base = declarative_base(cls=PalvinBase)
 Base.query = db_session.query_property()
 
