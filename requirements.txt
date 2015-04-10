@@ -1,0 +1,2 @@
+inflect==0.2.5
+SQLAlchemy==0.9.9
