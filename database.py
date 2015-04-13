@@ -1,20 +1,11 @@
 # -*- coding:utf-8 -*-
-"""
-    Secret data is stored in `secret` module.
-    :secret.DATABASE_USERNAME: A username for database
-    :secret.DATABASE_PASSWORD: A password for database.
-    :secret.DATABASE: A name for database.
-"""
-try:
-    import secret
-except ImportError:
-    raise ImportError("Secret module doesn't exist in 'palvin'")
-
 import datetime
 
 from sqlalchemy import create_engine, Column, BigInteger, DateTime
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
+
+from .config import SQLALCHEMY_DATABASE_URI
 
 
 class IdMixin(object):
@@ -109,12 +100,6 @@ class PalvinBase(CRUDMixin, object):
         return '_'.join(list(set(modules) - set(exclude_modules)))
 
 
-SQLALCHEMY_DATABASE_URI = 'postgresql://%s:%s@localhost/%s' % (
-    secret.DATABASE_USERNAME,
-    secret.DATABASE_PASSWORD,
-    secret.DATABASE
-)
-
 engine = create_engine(SQLALCHEMY_DATABASE_URI,
                        convert_unicode=True)
 
@@ -129,4 +114,3 @@ db_session = scoped_session(
 
 Base = declarative_base(cls=PalvinBase)
 Base.query = db_session.query_property()
-
