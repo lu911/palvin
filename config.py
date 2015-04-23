@@ -19,6 +19,6 @@ SQLALCHEMY_DATABASE_URI = 'postgresql://%s:%s@localhost/%s' % (
 
 
 try:
-    import local_config
+    from local_config import *
 except ImportError:
     pass

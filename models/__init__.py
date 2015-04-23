@@ -8,7 +8,9 @@ for root, directory_names, file_names in os.walk('palvin/models'):
             modname = '%s.%s' % (root.replace('/', '.'), split_filename[0])
             print "* Import %s..." % modname,
             try:
-                module = __import__(modname, globals=globals(), locals=locals(), fromlist=['*'])
+                module = __import__(
+                    modname, globals=globals(), locals=locals(), fromlist=['*']
+                )
             except ImportError:
                 continue
             else:
