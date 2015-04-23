@@ -16,6 +16,13 @@ class IdMixin(object):
     #: references from other models
     id = Column(BigInteger, primary_key=True)
 
+    @classmethod
+    def get(cls, _id):
+        if any((isinstance(_id, basestring) and _id.isdigit(),
+                isinstance(_id, (int, float))),):
+            return cls.query.get(int(_id))
+        return None
+
 
 class TimestampMixin(object):
     """
@@ -42,13 +49,6 @@ class CRUDMixin(object):
     @classmethod
     def query(cls):
         return db_session.query(cls)
-
-    @classmethod
-    def get(cls, _id):
-        if any((isinstance(_id, basestring) and _id.isdigit(),
-                isinstance(_id, (int, float))),):
-            return cls.query.get(int(_id))
-        return None
 
     @classmethod
     def get_by(cls, **kwargs):
