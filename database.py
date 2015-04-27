@@ -99,6 +99,26 @@ class PalvinBase(CRUDMixin, object):
         exclude_modules = ['palvin', 'models']
         return '_'.join(list(set(modules) - set(exclude_modules)))
 
+    @property
+    def repr(self):
+        if hasattr(self, 'id'):
+            return '<%s %s>' % (self.__class__.__name__, self.id)
+        else:
+            return '<%s #>' % self.__class__.__name__
+
+    def __repr__(self):
+
+        return self.repr.encode('utf8')
+
+    def __str__(self):
+        return self.repr.encode('utf8')
+
+    def __unicode__(self):
+        return self.repr
+
+    def __setattr__(self, key, value):
+        return super(PalvinBase, self).__setattr__(key, value)
+
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI,
                        convert_unicode=True)
