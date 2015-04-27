@@ -11,7 +11,7 @@ except ImportError:
     raise ImportError("Secret module doesn't exist in 'palvin'")
 
 
-SQLALCHEMY_DATABASE_URI = 'postgresql://%s:%s@localhost/%s' % (
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://%s:%s@localhost/%s' % (
     secret.DATABASE_USERNAME,
     secret.DATABASE_PASSWORD,
     secret.DATABASE
