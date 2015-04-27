@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
-from database import IdMixin, CRUDMixin, Base
-from models.media.constants import IMAGE_SIZE_TYPES
-
 from sqlalchemy import Column, Enum, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship, backref
+
+from palvin.database import IdMixin, CRUDMixin, Base
+from palvin.models.media.constants import IMAGE_SIZE_TYPES
 
 
 class ImageType(IdMixin, CRUDMixin, Base):

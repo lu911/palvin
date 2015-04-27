@@ -5,7 +5,7 @@ from sqlalchemy import create_engine, Column, BigInteger, DateTime
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
 
-from .config import SQLALCHEMY_DATABASE_URI
+from palvin.config import SQLALCHEMY_DATABASE_URI
 
 
 class IdMixin(object):
