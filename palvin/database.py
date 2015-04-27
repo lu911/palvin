@@ -1,11 +1,18 @@
 # -*- coding:utf-8 -*-
 import datetime
+import inflect
 
 from sqlalchemy import create_engine, Column, BigInteger, DateTime
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
 
 from palvin.config import SQLALCHEMY_DATABASE_URI
+from palvin.utils import (
+    camel_case_to_lower_case_underscore,
+    OrderedSet
+)
+
+exclude_modules = ['palvin', 'models']
 
 
 class IdMixin(object):
@@ -91,23 +98,23 @@ class PalvinBase(CRUDMixin, object):
 
     @declared_attr
     def __tablename__(cls):
-        import inflect
-
         p = inflect.engine()
         modules = cls.__module__.split('.')
-        modules[-1] = p.plural(modules[-1])
-        exclude_modules = ['palvin', 'models']
-        return '_'.join(list(set(modules) - set(exclude_modules)))
+        modules[-1] = p.plural(
+            camel_case_to_lower_case_underscore(cls.__name__)
+        )
+        return '_'.join(
+            list(OrderedSet(modules) - OrderedSet(exclude_modules))
+        )
 
     @property
     def repr(self):
-        if hasattr(self, 'id'):
+        if hasattr(self, 'id') and self.id is not None:
             return '<%s %s>' % (self.__class__.__name__, self.id)
         else:
             return '<%s #>' % self.__class__.__name__
 
     def __repr__(self):
-
         return self.repr.encode('utf8')
 
     def __str__(self):
@@ -120,8 +127,10 @@ class PalvinBase(CRUDMixin, object):
         return super(PalvinBase, self).__setattr__(key, value)
 
 
-engine = create_engine(SQLALCHEMY_DATABASE_URI,
-                       convert_unicode=True)
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URI,
+    convert_unicode=True
+)
 
 db_session = scoped_session(
     sessionmaker(
