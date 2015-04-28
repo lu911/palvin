@@ -11,7 +11,8 @@ for root, directory_names, file_names in os.walk('palvin/models'):
                 module = __import__(
                     modname, globals=globals(), locals=locals(), fromlist=['*']
                 )
-            except ImportError:
+            except ImportError, e:
+                print 'Error'
                 continue
             else:
                 for object_ in dir(module):
