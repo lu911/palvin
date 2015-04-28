@@ -6,7 +6,7 @@
     :secret.DATABASE: A name for database.
 """
 try:
-    from palvin import secret
+    import secret
 except ImportError:
     raise ImportError("Secret module doesn't exist in 'palvin'")
 

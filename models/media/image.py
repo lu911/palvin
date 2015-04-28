@@ -3,8 +3,8 @@ from sqlalchemy import Column, Enum, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declared_attr
 
-from palvin.database import IdMixin, Base
-from palvin.models.media.constants import IMAGE_SIZE_TYPES
+from database import IdMixin, Base
+from models.media.constants import IMAGE_SIZE_TYPES
 
 
 class ImageType(IdMixin, Base):

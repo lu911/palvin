@@ -6,8 +6,8 @@ from sqlalchemy import create_engine, Column, BigInteger, DateTime
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
 
-from palvin.config import SQLALCHEMY_DATABASE_URI
-from palvin.utils import (
+from config import SQLALCHEMY_DATABASE_URI
+from utils import (
     camel_case_to_lower_case_underscore,
     OrderedSet
 )
