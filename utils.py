@@ -1,5 +1,10 @@
 # -*- coding:utf-8 -*-
 import collections
+import uuid
+
+
+def get_uuid():
+    return str(uuid.uuid4()).replace('-', '')
 
 
 def camel_case_to_lower_case_underscore(string):
