@@ -17,6 +17,10 @@ SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://%s:%s@localhost/%s' % (
     secret.DATABASE
 )
 
+AWS_ACCESS_KEY = secret.AWS_ACCESS_KEY
+AWS_SECRET_ACCESS_KEY = secret.AWS_SECRET_ACCESS_KEY
+AWS_S3_BUCKET_NAME = 'palvin'
+
 
 try:
     from local_config import *
