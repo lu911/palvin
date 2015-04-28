@@ -1,3 +1,5 @@
+boto==2.38.0
 inflect==0.2.5
-psycopg2==2.6
+requests==2.6.2
 SQLAlchemy==0.9.9
+Wand==0.4.0
