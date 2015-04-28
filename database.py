@@ -13,6 +13,7 @@ from utils import (
 )
 
 exclude_modules = ['palvin', 'models']
+inflect_engine = inflect.engine()
 
 
 class IdMixin(object):
@@ -98,9 +99,10 @@ class PalvinBase(CRUDMixin, object):
 
     @declared_attr
     def __tablename__(cls):
-        p = inflect.engine()
+        global exclude_modules, inflect_engine
+
         modules = cls.__module__.split('.')
-        modules[-1] = p.plural(
+        modules[-1] = inflect_engine.plural(
             camel_case_to_lower_case_underscore(cls.__name__)
         )
         return '_'.join(
